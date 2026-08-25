@@ -1,6 +1,9 @@
 import { pwa } from "./configs/pwa";
 import { i18n } from "./configs/i18n";
 
+const baseURL = process.env.NUXT_APP_BASE_URL || "/";
+const siteURL = process.env.NUXT_PUBLIC_SITE_URL || "https://ohmycv.app";
+
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   srcDir: "src/",
@@ -41,25 +44,30 @@ export default defineNuxtConfig({
   },
 
   app: {
+    baseURL,
     head: {
       viewport: "width=device-width,initial-scale=1",
       link: [
-        { rel: "apple-touch-icon", href: "/apple-touch-icon.png" },
-        { rel: "mask-icon", href: "/safari-pinned-tab.svg", color: "#222" }
+        { rel: "apple-touch-icon", href: `${baseURL}apple-touch-icon.png` },
+        {
+          rel: "mask-icon",
+          href: `${baseURL}safari-pinned-tab.svg`,
+          color: "#222"
+        }
       ],
       meta: [
         { name: "viewport", content: "width=device-width, initial-scale=1" },
         { name: "application-name", content: "Oh My CV!" },
         { name: "apple-mobile-web-app-title", content: "Oh My CV!" },
         { name: "msapplication-TileColor", content: "#fff" },
-        { property: "og:url", content: "https://ohmycv.app" },
+        { property: "og:url", content: siteURL },
         { property: "og:type", content: "website" }
       ]
     }
   },
 
   site: {
-    url: "https://ohmycv.app"
+    url: siteURL
   },
 
   pwa
