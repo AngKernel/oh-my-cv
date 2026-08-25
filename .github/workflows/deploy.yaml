@@ -2,9 +2,8 @@ name: Build and deploy Nuxt site to Pages
 
 on:
   push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
+    branches: [main]
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -21,6 +20,8 @@ jobs:
 
     env:
       NODE_VERSION: 20
+      NUXT_APP_BASE_URL: /oh-my-cv/
+      NUXT_PUBLIC_SITE_URL: https://angkernel.github.io/oh-my-cv/
 
     steps:
       - name: Checkout
@@ -63,7 +64,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: site/dist
+          path: site/.output/public
 
   deploy:
     needs: build
