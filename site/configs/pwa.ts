@@ -1,6 +1,6 @@
 import type { ModuleOptions } from "@vite-pwa/nuxt";
 
-const scope = "/";
+const scope = process.env.NUXT_APP_BASE_URL || "/";
 
 export const pwa: ModuleOptions = {
   registerType: "autoUpdate",
@@ -9,21 +9,22 @@ export const pwa: ModuleOptions = {
   manifest: {
     id: scope,
     scope,
+    start_url: scope,
     name: "Oh My CV!",
     short_name: "Oh My CV!",
     icons: [
       {
-        src: "/pwa-192x192.png",
+        src: `${scope}pwa-192x192.png`,
         sizes: "192x192",
         type: "image/png"
       },
       {
-        src: "/pwa-512x512.png",
+        src: `${scope}pwa-512x512.png`,
         sizes: "512x512",
         type: "image/png"
       },
       {
-        src: "/favicon.svg",
+        src: `${scope}favicon.svg`,
         sizes: "512x512",
         type: "image/svg",
         purpose: "any maskable"
